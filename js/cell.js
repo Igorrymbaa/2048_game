@@ -10,10 +10,9 @@ class Cell {
 
 
         if (Math.random() > 0.8) {
-            this.value = Math.random() > 0.5 ? 4 : 2;
+            this.spawn()
         }
 
-        this.element.onclick = this.merge.bind(this);
     }
 
     get value() {
@@ -26,7 +25,18 @@ class Cell {
     clear() {
         this.value = '';
     }
-    merge() {
-        this.value *= 2;
+    
+    merge(cell) {
+        this.value += cell.value;
+        cell.clear();
+    }
+    isSameTo(cell) {
+        return this.value == cell.value;
+    }
+    spawn() {
+        this.value = Math.random() > 0.5 ? 4 : 2;
+    }
+    get isEmpty() {
+        return this.value == 0;
     }
 }
